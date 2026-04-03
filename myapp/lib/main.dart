@@ -28,9 +28,7 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: .fromSeed(
-          seedColor: const Color.fromARGB(255, 33, 201, 111),
-        ),
+        colorScheme: .fromSeed(seedColor: const Color.fromARGB(255, 0, 48, 23)),
       ),
       home: const MyHomePage(title: 'Fitness Tracker'),
     );
@@ -60,57 +58,172 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
       body: Center(
-        child: Table(
-          border: TableBorder.all(),
-          defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.of(
+              context,
+            ).push(MaterialPageRoute(builder: (_) => const PushUpPage()));
+          },
+          child: const Text('Go to PushUp Page'),
+        ),
+      ),
+    );
+  }
+}
+
+class PushUpPage extends StatefulWidget {
+  const PushUpPage({super.key});
+
+  @override
+  State<PushUpPage> createState() => _PushUpPageState();
+}
+
+class _PushUpPageState extends State<PushUpPage> {
+  int _selectedValue = 9;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('PushUp')),
+      body: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            TableRow(
+            Table(
+              border: TableBorder.all(),
+              defaultVerticalAlignment: TableCellVerticalAlignment.middle,
               children: [
-                Padding(
-                  padding: EdgeInsets.all(16),
-                  child: Image.asset(
-                    'assets/images/bruce.jpg',
-                    width: 100,
-                    height: 100,
-                    fit: BoxFit.fitHeight,
-                  ),
-                ),
-                Center(
-                  child: Padding(
-                    padding: EdgeInsets.all(16),
-                    child: DropdownButton<int>(
-                      value: _selectedValue,
-                      items: const [
-                        DropdownMenuItem(value: 9, child: Text('9')),
-                        DropdownMenuItem(value: 14, child: Text('14')),
-                        DropdownMenuItem(value: 19, child: Text('19')),
-                      ],
-                      onChanged: (int? newValue) {
-                        if (newValue != null) {
-                          setState(() {
-                            _selectedValue = newValue;
-                          });
-                        }
-                      },
+                TableRow(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Image.asset(
+                            'assets/images/bruce.jpg',
+                            width: 200,
+                            height: 200,
+                            fit: BoxFit.fitHeight,
+                          ),
+                          const SizedBox(height: 12),
+                          ElevatedButton(
+                            onPressed: () {
+                              showDialog<void>(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  title: const Text('PushUp Description'),
+                                  content: const Text(
+                                    'Push-ups are a compound bodyweight exercise that strengthens chest, shoulders, triceps, and core.',
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.of(context).pop(),
+                                      child: const Text('Close'),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                            child: const Text('Description'),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
+                    Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: DropdownButton<int>(
+                          value: _selectedValue,
+                          items: const [
+                            DropdownMenuItem(value: 4, child: Text('4 KG')),
+                            DropdownMenuItem(value: 9, child: Text('9 KG')),
+                            DropdownMenuItem(value: 14, child: Text('14 KG')),
+                            DropdownMenuItem(value: 18, child: Text('18 KG')),
+                            DropdownMenuItem(value: 23, child: Text('23 KG')),
+                            DropdownMenuItem(value: 27, child: Text('27 KG')),
+                            DropdownMenuItem(value: 32, child: Text('32 KG')),
+                            DropdownMenuItem(value: 36, child: Text('36 KG')),
+                            DropdownMenuItem(value: 41, child: Text('41 KG')),
+                            DropdownMenuItem(value: 45, child: Text('45 KG')),
+                            DropdownMenuItem(value: 50, child: Text('50 KG')),
+                            DropdownMenuItem(value: 54, child: Text('54 KG')),
+                            DropdownMenuItem(value: 59, child: Text('59 KG')),
+                            DropdownMenuItem(value: 64, child: Text('64 KG')),
+                            DropdownMenuItem(value: 68, child: Text('68 KG')),
+                            DropdownMenuItem(value: 73, child: Text('73 KG')),
+                            DropdownMenuItem(value: 77, child: Text('77 KG')),
+                            DropdownMenuItem(value: 82, child: Text('82 KG')),
+                            DropdownMenuItem(value: 86, child: Text('86 KG')),
+                            DropdownMenuItem(value: 91, child: Text('91 KG')),
+                          ],
+                          onChanged: (int? newValue) {
+                            if (newValue != null) {
+                              setState(() {
+                                _selectedValue = newValue;
+                              });
+                            }
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                TableRow(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Icon(Icons.fitness_center, size: 120),
+                          const SizedBox(height: 12),
+                          const Text(
+                            'Chest Only',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+                          ElevatedButton(
+                            onPressed: () {
+                              showDialog<void>(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  title: const Text('Chest Only Description'),
+                                  content: const Text(
+                                    'This row is for chest-only training: focus on bench press, flys, and chest dips.',
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.of(context).pop(),
+                                      child: const Text('Close'),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                            child: const Text('Description'),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(16),
+                        child: Text('Chest only info and tips'),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
